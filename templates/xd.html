@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>room</title>
+  <script src="jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<a class="button" onclick="connect()">Entrar una sala</a>
+<script src="https://media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
+<script>
+    function connect(){
+        const { connect } = require('twilio-video');
+
+    connect('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzAwMDIwY2E1NTlhZDdkNGM4YmI5N2U4OWMyMDUxY2NhLTE2MTU0MjM0ODkiLCJpc3MiOiJTSzAwMDIwY2E1NTlhZDdkNGM4YmI5N2U4OWMyMDUxY2NhIiwic3ViIjoiQUM4OTc5Mjg0NTdkYzFiZDA0ZThlMDIyNTRkMTI3OTI0NCIsImV4cCI6MTYxNTQyNzA4OSwiZ3JhbnRzIjp7ImlkZW50aXR5IjoieGRkIiwidmlkZW8iOnt9fX0.apB6QSrWCe5nflUwMry54OLkdQceWRbCjux_Qip6Wro', { name:'{{ room.unique_name }}' }).then(room => {
+      console.log(`Successfully joined a Room: ${room}`);
+      room.on('participantConnected', participant => {
+        console.log(`A remote Participant connected: ${participant}`);
+      });
+    }, error => {
+      console.error(`Unable to connect to Room: ${error.message}`);
+    });
+    }
+</script>
+</body>
+</html>
